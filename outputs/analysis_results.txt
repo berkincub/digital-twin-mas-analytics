@@ -1,0 +1,53 @@
+=== İSTATİSTİKSEL ANALİZ RAPORU ===
+
+1. Shapiro-Wilk Normallik Testi:
+   W=0.9023, p=1.8179e-06
+   Yorum: p < 0.05 ise veriler normal dağılmamaktadır. Anomali senaryolarında genelde veriler çarpık dağılır.
+--------------------------------------------------
+2. Kolmogorov-Smirnov Normallik Testi:
+   D=0.1183, p=1.1245e-01
+   Yorum: p < 0.05 ise standart normal dağılımdan anlamlı şekilde sapma vardır.
+--------------------------------------------------
+3. Binom Bias Testi (Eşik: Impact >= 9.0):
+   Kritik Vaka Oranı: 30/100 (30.0%)
+   p=7.8501e-05
+   Yorum: p < 0.05 ise sistemde %50'den sapma vardır (Aşırı kritik veya düşük olay bias'ı).
+--------------------------------------------------
+4. Mann-Whitney U Testi (Zaman Serisi 1. Dalga vs 2. Dalga):
+   U=1423.0, p=2.3437e-01
+   Yorum: İlk periyot ile ikinci periyot arasında medyan etki (Impact) büyüklüğü açısından anlamlı fark olup olmadığını gösterir.
+--------------------------------------------------
+5. Chi-Square Tehdit Vektörü Homojenlik Testi:
+   Chi2=4.1600, p=5.2662e-01
+   Yorum: Tehdit tipleri eşit mi dağılıyor? p < 0.05 ise bazı tehdit vektörleri diğerlerinden çok daha baskındır.
+--------------------------------------------------
+6. Shannon Entropy (Şiddet Çeşitliliği):
+   H=1.7759
+   Yorum: Yüksek entropy, farklı şiddet seviyelerinin karmaşıklığını ve düzensizliğini; düşük entropy ise tek bir şiddet seviyesinin domine ettiğini gösterir.
+--------------------------------------------------
+7. Kruskal-Wallis Testi (Tehdit Tipi vs Impact_Magnitude):
+   H=4.4225, p=4.9032e-01
+   Yorum: p < 0.05 ise farklı tehdit vektörlerinin (örn. POWER_SURGE vs HVAC_SABOTAGE) yarattığı hasar/etki boyutları arasında istatistiksel fark vardır.
+--------------------------------------------------
+8. Spearman Rank Korelasyonu (KG_Entity_Count vs Impact_Magnitude):
+   rho=-0.1075, p=2.8715e-01
+   Yorum: Bilgi grafiğindeki varlık sayısı arttıkça etkinin büyüme/küçülme eğilimi. Pozitifse kompleks olaylar daha büyük etki yaratıyor demektir.
+--------------------------------------------------
+9. K-Means Kümeleme (K=2 - Impact ve KG_Entity_Count):
+   Merkezler (Centroids):
+   Küme 0: Impact=7.67, KG_Count=74.50
+   Küme 1: Impact=6.97, KG_Count=124.50
+   Yorum: Vakalar, genellikle etki seviyeleri ve karmaşıklıkları bakımından 2 ayrı kümeye ayrılabilir.
+--------------------------------------------------
+10. Lag-1 Otokorelasyon (Zaman Serisinde Impact):
+    r=-0.1811
+    Yorum: Birbirini ardışık izleyen anomaliler benzer büyüklükte mi? Pozitif değer trend olduğunu, sıfır veya negatif değer ise rastgeleliği/dalgalanmayı gösterir.
+--------------------------------------------------
+11. Z-Skoru Aykırı Değer Analizi (|Z| > 3):
+    Toplam Aykırı Değer (Outlier) Sayısı: 0
+    Yorum: Sistem genel normların dışında gerçekleşmiş sıra dışı anomali/kara kuğu (Black Swan) etkinliklerini temsil eder.
+--------------------------------------------------
+12. Pearson Korelasyonu (Batch Size vs Impact_Magnitude):
+    r=nan, p=nan
+    Yorum: Aynı anda etkilenen node sayısının gruplanması ile etki büyüklüğü arasındaki lineer ilişkiyi verir.
+--------------------------------------------------
